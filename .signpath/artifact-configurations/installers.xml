@@ -3,13 +3,30 @@
   <parameters>
     <parameter name="version" required="true" />
   </parameters>
-  <!-- The workflow uploads one ZIP containing both unsigned installers. -->
+  <!--
+    SignPath Foundation requires metadata restrictions on all signed files.
+    Values verified against the local 0.1.0 bundles:
+      MSI: ProductName=Bergag, ProductVersion=0.1.0, Manufacturer=bergag
+      EXE: ProductName=Bergag, ProductVersion=0.1.0, FileVersion=0.1.0
+    The workflow uploads one ZIP containing both unsigned installers.
+  -->
   <zip-file>
-    <msi-file path="Bergag_${version}_x64_en-US.msi">
+    <msi-file
+      path="Bergag_${version}_x64_en-US.msi"
+      subject="Bergag"
+      author="bergag"
+    >
       <authenticode-sign />
     </msi-file>
-    <pe-file path="Bergag_${version}_x64-setup.exe">
-      <authenticode-sign />
-    </pe-file>
+    <pe-file-set
+      product-name="Bergag"
+      product-version="${version}"
+      file-version="${version}"
+    >
+      <include path="Bergag_${version}_x64-setup.exe" />
+      <for-each>
+        <authenticode-sign />
+      </for-each>
+    </pe-file-set>
   </zip-file>
 </artifact-configuration>
