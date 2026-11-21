@@ -10,6 +10,8 @@ SignPath Foundation provides free code signing to qualifying open-source project
 
 - `LICENSE` — MIT, an OSI-approved license with no commercial dual-licensing.
 - Public source repository: <https://github.com/Fadlelmula/bergag>.
+- A [source-only release](https://github.com/Fadlelmula/bergag/releases/tag/v0.1.0-m9) providing a stable download URL for the application; no installer binaries are attached.
+- [docs/SIGNPATH-APPLICATION-DRAFT.md](SIGNPATH-APPLICATION-DRAFT.md) — ready-to-paste application answers and a post-acceptance checklist.
 - `README.md` — product description, build instructions, download location, privacy statement, and a Code signing policy section.
 - `.github/workflows/release-build.yml` — builds the unsigned MSI and NSIS installers on a `windows-latest` runner, packs both into one ZIP, uploads that ZIP as the unsigned artifact, and submits it to SignPath only when the SignPath values are configured. It verifies `Get-AuthenticodeSignature` status before uploading signed artifacts. It does **not** publish a GitHub Release.
 - `.signpath/artifact-configurations/installers.xml` — a `<zip-file>` artifact configuration with a required `version` parameter that Authenticode-signs both `Bergag_${version}_x64_en-US.msi` and `Bergag_${version}_x64-setup.exe` inside that ZIP. This matches the documented SignPath syntax. SignPath can generate a refined configuration from an uploaded artifact; use that if you also want to deep-sign the embedded `bergag.exe` inside the MSI.
@@ -21,8 +23,8 @@ SignPath Foundation provides free code signing to qualifying open-source project
    - Project name: Bergag
    - Repository: <https://github.com/Fadlelmula/bergag>
    - License: MIT (`LICENSE` at repository root)
-   - Download URL: the [GitHub Releases page](https://github.com/Fadlelmula/bergag/releases) (a release must exist before approval)
-   - Description: a local-first, account-free Windows reading application; installers are MSI and NSIS built by `release-build.yml` on GitHub-hosted runners.
+   - Download URL: the [v0.1.0-m9 source-only release](https://github.com/Fadlelmula/bergag/releases/tag/v0.1.0-m9), created 2026-11-21. If SignPath requires downloadable installers for the "released" criterion, attaching unsigned binaries is a separate decision that needs explicit approval.
+   - Description: a local-first, account-free Windows reading application; installers are MSI and NSIS built by `release-build.yml` on GitHub-hosted runners. Ready-to-paste answers are in [docs/SIGNPATH-APPLICATION-DRAFT.md](SIGNPATH-APPLICATION-DRAFT.md).
 3. After acceptance, sign in to <https://app.signpath.io>, enable MFA, install the [SignPath GitHub App](https://github.com/apps/signpath) for this repository, and add the predefined **GitHub.com** trusted build system to the organization.
 4. In SignPath, create the project and link it to this repository; add the `installers` artifact configuration from `.signpath/artifact-configurations/installers.xml`; create a signing policy using the SignPath Foundation certificate with a named approver and origin verification restricted to `release-build.yml` on `refs/tags/v*`.
 5. Add repository secrets and variables:
