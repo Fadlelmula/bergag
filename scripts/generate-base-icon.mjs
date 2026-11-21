@@ -93,10 +93,27 @@ function makePng() {
         blend(pixel, [238, 116, 132], alpha * 0.9);
       }
 
+      // Dark medallion keeps the Bergag monogram legible over the petals while
+      // the outer crimson lily and pink stamens remain visible as a halo.
       const centerDistance = Math.hypot(nx, ny);
-      if (centerDistance < 0.065) {
-        blend(pixel, [247, 192, 199], (1 - smoothstep(0.02, 0.065, centerDistance)) * 0.95);
-      }
+      blend(pixel, [12, 9, 13], (1 - smoothstep(0.39, 0.44, centerDistance)) * 0.97);
+      const rim =
+        smoothstep(0.4, 0.425, centerDistance) * (1 - smoothstep(0.44, 0.465, centerDistance));
+      blend(pixel, [190, 56, 76], rim * 0.6);
+
+      // Block-style "B" initial for Bergag, drawn as six soft-edged bars.
+      const monogram = (x0, y0, x1, y1) => {
+        const dx = Math.max(x0 - nx, 0, nx - x1);
+        const dy = Math.max(y0 - ny, 0, ny - y1);
+        const distance = Math.hypot(dx, dy);
+        blend(pixel, [249, 206, 212], (1 - smoothstep(0, 0.014, distance)) * 0.98);
+      };
+      monogram(-0.27, -0.33, -0.15, 0.33); // spine
+      monogram(-0.27, -0.33, 0.07, -0.22); // top bar
+      monogram(-0.03, -0.33, 0.09, -0.055); // upper bowl edge
+      monogram(-0.27, -0.055, 0.04, 0.055); // middle bar
+      monogram(-0.02, 0.055, 0.11, 0.33); // lower bowl edge
+      monogram(-0.27, 0.22, 0.1, 0.33); // bottom bar
 
       const offset = rowStart + 1 + x * 4;
       raw[offset] = pixel[0];
