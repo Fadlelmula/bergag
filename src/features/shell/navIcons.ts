@@ -1,0 +1,38 @@
+import {
+  Archive,
+  BarChart3,
+  Bookmark,
+  Compass,
+  FileText,
+  Highlighter,
+  History,
+  Home,
+  List,
+  Rss,
+  Search,
+  Settings,
+  Sparkles,
+  Star,
+  Tags,
+  type LucideIcon,
+} from "lucide-react";
+import type { NavItemId } from "../../domain/navigation";
+
+export const NAV_ICONS: Record<NavItemId, LucideIcon> = {
+  home: Home,
+  allFeeds: Rss,
+  unread: FileText,
+  readLater: Bookmark,
+  favorites: Star,
+  archive: Archive,
+  queue: List,
+  history: History,
+  discover: Compass,
+  briefings: FileText,
+  highlights: Highlighter,
+  topics: Tags,
+  statistics: BarChart3,
+  ai: Sparkles,
+  search: Search,
+  settings: Settings,
+};
