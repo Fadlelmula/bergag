@@ -112,7 +112,7 @@ These are intentional bounds, not claims of unbounded scaling:
 - No signing key is configured or stored in the repository; signing requires explicit permission.
 - The license is MIT, chosen by the user on 2026-11-21.
 - The update endpoint and public key are unset in local builds.
-- A baseline commit, annotated tag `v0.1.0-m9`, and MIT license file were created with explicit permission. No push, publish, or signing action has been performed.
+- A baseline commit, annotated tag `v0.1.0-m9`, and MIT license file were created with explicit permission. The commit and tag were pushed to https://github.com/Fadlelmula/bergag; installer signing and binary release were not performed.
 
 ## Artifact inspection
 
@@ -134,8 +134,8 @@ Review the full file list. Never stage databases, WAL/SHM/journal sidecars, logs
 
 ## Sign-off note
 
-Milestone 9 was signed off by the user on 2026-11-21 after review of the automated gates, runtime migration/backup verification, and unsigned bundles. It was the final planned milestone. The remaining human desktop checks in this checklist are still outstanding before a public release. With user authorization, the MIT license was added and a baseline commit and annotated tag `v0.1.0-m9` were created. Installer signing was explicitly deferred by the user; publishing is pending remote repository setup.
+Milestone 9 was signed off by the user on 2026-11-21 after review of the automated gates, runtime migration/backup verification, and unsigned bundles. It was the final planned milestone. The remaining human desktop checks in this checklist are still outstanding before a public release. With user authorization, the MIT license was added and a baseline commit and annotated tag `v0.1.0-m9` were created. Installer signing was explicitly deferred by the user; the source and tag were pushed to https://github.com/Fadlelmula/bergag, and installer binaries were not released.
 
 ## Baseline note
 
-The signed-off baseline was created on 2026-11-21 as an initial commit with an annotated tag `v0.1.0-m9`, using the identity Fadlelmula <work@fadlelmula.com>. No push or publish has been performed. A remote repository is the next release step; it has not been created yet.
+The signed-off baseline was created on 2026-11-21 as an initial commit with an annotated tag `v0.1.0-m9`, using the identity Fadlelmula <work@fadlelmula.com>. The commit and tag were pushed to the public repository https://github.com/Fadlelmula/bergag. Installer binaries were neither signed nor released.

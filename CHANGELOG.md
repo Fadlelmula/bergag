@@ -2,7 +2,7 @@
 
 All notable changes to Bergag will be documented here.
 
-> Sign-off: Milestone 9 was approved by the user on 2026-11-21 after local verification. It was the final planned milestone. With authorization, the MIT license was added and a baseline commit and annotated tag `v0.1.0-m9` were created. Installer signing was deferred by user decision; publishing is pending remote setup.
+> Sign-off: Milestone 9 was approved by the user on 2026-11-21 after local verification. It was the final planned milestone. With authorization, the MIT license was added and a baseline commit and annotated tag `v0.1.0-m9` were created. Installer signing was deferred by user decision; the source and tag were pushed to https://github.com/Fadlelmula/bergag without releasing installer binaries.
 
 ## [Unreleased] — 2026-11-21 — Milestone 9: Backup, security, final polish
 
@@ -32,7 +32,7 @@ All notable changes to Bergag will be documented here.
 
 - Backups are app-managed snapshots rather than arbitrary exports; manual backups persist until deleted, and only the five newest automatic backups are pruned.
 - Update installation, profile lock/encryption, Bluesky, true website change monitoring, semantic search, and Advanced settings remain unavailable or planned and are labeled as such.
-- The MIT license, baseline commit, and annotated tag were created with explicit permission. Installer signing was deferred by user decision; publishing is pending remote setup.
+- The MIT license, baseline commit, and annotated tag were created with explicit permission. Installer signing was deferred by user decision; the source and tag were pushed to https://github.com/Fadlelmula/bergag without releasing installer binaries.
 
 ## [Unreleased] — 2026-11-20 — Milestone 8: Public feed integrations
 
