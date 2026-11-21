@@ -11,6 +11,26 @@ Bergag is a local-first desktop information and reading platform for Windows. It
 - **User control:** destructive or library-changing actions require explicit confirmation.
 - **Real functionality:** no fake buttons, demo articles, invented metrics, or placeholder integrations presented as finished.
 
+## Screenshots
+
+Captured from a real local profile populated by subscribing to seven public RSS/Atom feeds (180 articles). Feed names, headlines, counts, and diagnostics below come from Bergag's local SQLite database; no demo content or invented metrics were added.
+
+|                                    Home                                     |                                Feeds and subscriptions                                 |
+| :-------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
+| [![Bergag home view](docs/screenshots/home.png)](docs/screenshots/home.png) | [![Bergag subscriptions view](docs/screenshots/feeds.png)](docs/screenshots/feeds.png) |
+
+|                                    Unread articles                                    |                                      Discovery directory                                      |
+| :-----------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: |
+| [![Bergag unread articles](docs/screenshots/unread.png)](docs/screenshots/unread.png) | [![Bergag discovery directory](docs/screenshots/discover.png)](docs/screenshots/discover.png) |
+
+|                                Search and stories                                 |                                      Reading statistics                                       |
+| :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: |
+| [![Bergag search view](docs/screenshots/search.png)](docs/screenshots/search.png) | [![Bergag statistics view](docs/screenshots/statistics.png)](docs/screenshots/statistics.png) |
+
+|                                         Briefings                                          |                                         Settings                                          |
+| :----------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: |
+| [![Bergag briefings view](docs/screenshots/briefings.png)](docs/screenshots/briefings.png) | [![Bergag settings dialog](docs/screenshots/settings.png)](docs/screenshots/settings.png) |
+
 ## Planned capabilities
 
 RSS/Atom/JSON ingestion, feed discovery and autodiscovery, OPML, offline reading, extraction, search with operators, smart feeds, rules, collections, tags, topics, briefings, dashboards, private analytics, optional AI providers, modular integrations, profiles, backups, system tray, and Windows installer. Milestone 2 implemented the feed acquisition layer. Milestone 3 added the local reader: article list modes, sanitized HTML, explicit extraction, read state, saved/favorite/archive, history, notes, highlights, collections, bulk actions, offline images, a reading queue, and focus mode. Milestone 4 adds a private local discovery directory, feed preview and subscription, categories and trust levels, tags and topics, a visual rule builder, smart-feed views, and rule run history. Milestone 5 adds local FTS5 search with operators and scopes, saved searches, duplicate detection, story groups, a story timeline, and related-article connections. Milestone 6 adds user-authored dashboards and widgets, private on-demand analytics, reading statistics, feed health, local storage totals, and daily/weekly briefings generated only from stored data. Milestone 7 adds optional, explicit AI providers (OpenAI, Anthropic, Gemini, Ollama, and OpenAI-compatible HTTPS endpoints), Windows credential-store secrets, per-feature privacy gates, an AI privacy dashboard, and local usage history. Milestone 8 adds public, feed-backed integrations for YouTube, Reddit, GitHub releases, Hacker News, arXiv, podcasts, Medium, Substack, Mastodon public posts, public-newsletter RSS, and website feeds; Bluesky and true website change monitoring remain visibly planned. Milestone 9 adds verified app-managed local backups with safety-backup restore, read-only privacy and security dashboards, local notification preferences, tray and launch-on-sign-in controls, a signature-verified update-check-only framework, and honest security/profile-lock status; Advanced remains planned.
