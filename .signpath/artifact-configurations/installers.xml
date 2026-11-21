@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<artifact-configuration xmlns="http://signpath.io/artifact-configuration/v1">
+  <parameters>
+    <parameter name="version" required="true" />
+  </parameters>
+  <!-- The workflow uploads one ZIP containing both unsigned installers. -->
+  <zip-file>
+    <msi-file path="Bergag_${version}_x64_en-US.msi">
+      <authenticode-sign />
+    </msi-file>
+    <pe-file path="Bergag_${version}_x64-setup.exe">
+      <authenticode-sign />
+    </pe-file>
+  </zip-file>
+</artifact-configuration>

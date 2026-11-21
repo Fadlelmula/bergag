@@ -1,0 +1,127 @@
+name: Release build
+
+# Builds Bergag's Windows installers on a GitHub-hosted runner. The unsigned
+# artifact is always produced. Signing only runs when SignPath organization,
+# project, policy and API-token values are configured as repository
+# variables/secrets; otherwise the build remains honestly unsigned. Publishing
+# a GitHub Release is a separate manual step and is intentionally not done here.
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust artifacts
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+
+      - name: Install WiX Toolset v3 and NSIS
+        run: choco install wixtoolset nsis --no-progress -y
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Read application version
+        id: app-version
+        shell: pwsh
+        run: |
+          $version = (Get-Content "src-tauri/tauri.conf.json" -Raw | ConvertFrom-Json).version
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Build unsigned Windows installers
+        run: npm run tauri build
+
+      - name: Package unsigned installers for SignPath
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path release-artifacts | Out-Null
+          Copy-Item "src-tauri/target/release/bundle/msi/Bergag_*_x64_en-US.msi" -Destination release-artifacts
+          Copy-Item "src-tauri/target/release/bundle/nsis/Bergag_*_x64-setup.exe" -Destination release-artifacts
+          $version = "${{ steps.app-version.outputs.version }}"
+          Compress-Archive -Path "release-artifacts/Bergag_${version}_x64_en-US.msi", "release-artifacts/Bergag_${version}_x64-setup.exe" -DestinationPath "bergag-${version}-unsigned.zip" -Force
+          Get-ChildItem "bergag-${version}-unsigned.zip" | Select-Object Name, Length
+
+      - name: Upload unsigned artifact
+        id: upload-unsigned
+        uses: actions/upload-artifact@v7
+        with:
+          name: bergag-unsigned
+          path: bergag-*-unsigned.zip
+          if-no-files-found: error
+
+      - name: Check SignPath configuration
+        id: signpath-config
+        shell: pwsh
+        env:
+          SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
+          SIGNPATH_ORGANIZATION_ID: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          SIGNPATH_PROJECT_SLUG: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          SIGNPATH_SIGNING_POLICY_SLUG: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+        run: |
+          $configured = -not [string]::IsNullOrWhiteSpace($env:SIGNPATH_API_TOKEN) -and
+            -not [string]::IsNullOrWhiteSpace($env:SIGNPATH_ORGANIZATION_ID) -and
+            -not [string]::IsNullOrWhiteSpace($env:SIGNPATH_PROJECT_SLUG) -and
+            -not [string]::IsNullOrWhiteSpace($env:SIGNPATH_SIGNING_POLICY_SLUG)
+          "configured=$($configured.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          "SignPath configured: $configured"
+
+      - name: Submit signing request
+        id: signpath
+        if: steps.signpath-config.outputs.configured == 'true'
+        uses: signpath/github-action-submit-signing-request@v2
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+          artifact-configuration-slug: installers
+          github-artifact-id: ${{ steps.upload-unsigned.outputs.artifact-id }}
+          wait-for-completion: true
+          output-artifact-directory: signed-artifacts
+          parameters: |
+            version: "${{ steps.app-version.outputs.version }}"
+
+      - name: Verify signed installers
+        if: steps.signpath-config.outputs.configured == 'true'
+        shell: pwsh
+        run: |
+          $files = Get-ChildItem -Path signed-artifacts -Recurse -File |
+            Where-Object { $_.Extension -in @('.msi', '.exe') }
+          if (-not $files) { throw "No signed installers were returned by SignPath." }
+          foreach ($file in $files) {
+            $signature = Get-AuthenticodeSignature -FilePath $file.FullName
+            if ($signature.Status -ne 'Valid') {
+              throw "Invalid signature on $($file.Name): $($signature.Status)"
+            }
+            Write-Host "Valid signature: $($file.Name) - $($signature.SignerCertificate.Subject)"
+          }
+
+      - name: Upload signed artifact
+        if: steps.signpath-config.outputs.configured == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: bergag-signed
+          path: signed-artifacts/**
+          if-no-files-found: error

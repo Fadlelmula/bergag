@@ -59,6 +59,30 @@ Bergag does not enable telemetry, require an account, configure an AI provider, 
 
 Semantic search remains unimplemented and visibly marked as planned. Briefings, dashboards, private analytics, and explicit AI features are implemented. AI has no scheduler, automatic labeling, streaming responses, tool use, embeddings, or local model runner beyond an explicitly configured Ollama HTTP endpoint; label suggestions return text only and do not apply labels automatically. Search is lexical FTS5 over locally stored titles, article text, authors, and feed titles; it does not understand meaning or synonyms. Duplicate detection is a manual, heuristic match on canonical URLs and title-token similarity within a 45-day window, so it can miss paraphrased coverage and it creates a story group for every ungrouped article. Discovery is manual: you add feed URLs to a private local directory and can filter that directory by title, URL, or category. There is no third-party search provider. Rules run only when you choose Run or Run enabled rules; there is no hidden background mutation. Image caching is limited to common raster types and at most eight images per extracted article. OPML export contains your feed URLs and folder names, so keep it private. Integrations support public feeds only: authenticated accounts, private subreddits, private repositories, and email-only newsletters are not available. Bluesky and true website change monitoring are visibly planned and make no requests. Local MSI and NSIS bundles build successfully but are unsigned and unpublished. Backups stay in the app-managed backup directory; there is no user-chosen export destination or per-profile export, and only the five newest automatic backups are pruned. Profile lock, encryption, and update installation are unavailable; local builds have no signed update endpoint or public key and never fake a check or progress. Notifications fire only for tray refresh, tray backup, and the explicit test, not for in-app or scheduler events. Privacy and Security posture flags are build-time assertions covered by tests rather than live scans. The project is licensed under MIT; installer signing remains deferred and installer binaries were not released, but the source is published at https://github.com/Fadlelmula/bergag.
 
+## Build from source
+
+Building requires Windows, Node.js 20+, Rust (stable), WiX Toolset v3, and NSIS. From the repository root:
+
+```powershell
+npm ci
+cmd /c "npm run verify:release"
+```
+
+The unsigned MSI and NSIS installers are written to `src-tauri/target/release/bundle/`. See [DEVELOPMENT.md](DEVELOPMENT.md) for the full command reference and gate descriptions.
+
+## Downloads
+
+Source and the signed-off baseline are published at <https://github.com/Fadlelmula/bergag>. Installer binaries have not been released. When releases are published they will appear on the [GitHub Releases page](https://github.com/Fadlelmula/bergag/releases); do not treat any other location as official. See [docs/SIGNING.md](docs/SIGNING.md) for the current signing status.
+
+## Code signing policy
+
+Free code signing provided by SignPath.io, certificate by SignPath Foundation. Bergag is preparing an application to the SignPath Foundation open-source program; **signing is not active yet** and current builds are unsigned. SignPath's certificate attests only to build provenance: copyright of the Bergag source remains with Fadlelmula, as asserted by [LICENSE](LICENSE). Windows displays SignPath Foundation as the signer because the certificate belongs to them, not because they own the software. See [docs/SIGNING.md](docs/SIGNING.md) for the owner-only setup steps and limitations.
+
+- **Authors and reviewers:** the repository owner (`@Fadlelmula`), through repository permissions and branch protection on `main`.
+- **Approver:** the repository owner (`@Fadlelmula`). Each signing request requires manual approval and is restricted to the public `release-build.yml` workflow on `refs/tags/v*` running on GitHub-hosted runners.
+- **System changes:** launch-on-sign-in and close/tray behavior are explicit user settings. Bergag does not change system configuration without the user's action, and MSI/NSIS installation provides an uninstall path.
+- **Privacy statement:** Bergag has no telemetry, analytics, ads, or account, and sends no user data to systems the user has not specified. Network activity is limited to public feeds and article URLs the user subscribes to or previews (including a local 60-second refresh schedule for active subscriptions), explicit full-page extraction, locally cached images, optional AI endpoints the user configures and confirms per request, and update checks only when a signed endpoint and public key are compiled in. No article content, library data, or credential is transmitted by default. Third-party components and any public feed or integration the user adds have their own terms; see [SECURITY.md](SECURITY.md).
+
 ## License
 
 Bergag is licensed under the [MIT License](LICENSE), added on 2026-11-21 with the user's explicit choice. See [docs/RELEASE-CHECKLIST.md](docs/RELEASE-CHECKLIST.md) for the remaining release decisions.

@@ -4,6 +4,18 @@ All notable changes to Bergag will be documented here.
 
 > Sign-off: Milestone 9 was approved by the user on 2026-11-21 after local verification. It was the final planned milestone. With authorization, the MIT license was added and a baseline commit and annotated tag `v0.1.0-m9` were created. Installer signing was deferred by user decision; the source and tag were pushed to https://github.com/Fadlelmula/bergag without releasing installer binaries.
 
+## [Unreleased] — 2026-11-21 — SignPath signing preparation (not active)
+
+### Added
+
+- A GitHub Actions release workflow that builds unsigned MSI/NSIS installers on a GitHub-hosted Windows runner, packs both into one ZIP, uploads it as the unsigned artifact, submits it to SignPath only when all SignPath values are configured, verifies returned Authenticode signatures, and never publishes a release automatically.
+- A SignPath `<zip-file>` artifact configuration with a required `version` parameter that Authenticode-signs both installers.
+- A code signing policy, build instructions, download location, and privacy statement in `README.md`, plus `docs/SIGNING.md` with the owner-only application steps and trust limitations.
+
+### Notes
+
+- No SignPath application was submitted, no values were configured, and no installer was signed or released. This is preparation only and does not change the deferred signing decision.
+
 ## [Unreleased] — 2026-11-21 — Milestone 9: Backup, security, final polish
 
 ### Added

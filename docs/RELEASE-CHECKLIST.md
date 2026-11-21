@@ -83,6 +83,7 @@ The previous M8 baseline was 54 frontend tests and 85 Rust tests. The current re
 - [x] Installer architecture and version match the build: 0.1.0 x64 MSI and NSIS.
 - [x] Signing and distribution are not performed without explicit permission.
 - [x] License choice resolved: the user selected MIT on 2026-11-21 and the license file was added.
+- [ ] SignPath Foundation prerequisites are prepared but inactive (workflow, artifact configuration, and `docs/SIGNING.md`). Application, account configuration, and manual approval remain owner-only; see [docs/SIGNING.md](SIGNING.md).
 
 ### Performance and accessibility
 
@@ -113,6 +114,7 @@ These are intentional bounds, not claims of unbounded scaling:
 - The license is MIT, chosen by the user on 2026-11-21.
 - The update endpoint and public key are unset in local builds.
 - A baseline commit, annotated tag `v0.1.0-m9`, and MIT license file were created with explicit permission. The commit and tag were pushed to https://github.com/Fadlelmula/bergag; installer signing and binary release were not performed.
+- On 2026-11-21 the user chose SignPath Foundation as the intended free signing route. CI/build/config prerequisites were prepared locally for review only; no application was submitted, no SignPath secrets/variables were configured, and no installer was signed.
 
 ## Artifact inspection
 
