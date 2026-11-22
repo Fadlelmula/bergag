@@ -2,7 +2,7 @@
 
 Bergag is a local-first desktop information and reading platform for Windows. It is being built as a private, account-free personal intelligence cockpit: a place to subscribe to sources, read and preserve articles, organize research, and optionally use AI without making the cloud a dependency.
 
-> Status: **Milestones 1–9 approved and complete.** Milestone 9 — Backup, security, final polish was signed off on 2026-11-21 after local verification. The MIT license was added and a baseline commit/tag were created with user authorization. Installer signing was deferred by user decision; the source was published to a public GitHub repository (installer binaries were not released).
+> Status: **Milestones 1–9 approved and complete.** Milestone 9 — Backup, security, final polish was signed off on 2026-11-21 after local verification. The MIT license was added and a baseline commit/tag were created with user authorization. Installer signing was deferred by user decision; the SignPath Foundation application was declined on 2026-11-22, and the source was published to a public GitHub repository (installer binaries were not released).
 
 ## Product principles
 
@@ -96,7 +96,7 @@ Source and the signed-off baseline are published at <https://github.com/Fadlelmu
 
 ## Code signing policy
 
-Free code signing provided by SignPath.io, certificate by SignPath Foundation. Bergag is preparing an application to the SignPath Foundation open-source program; **signing is not active yet** and current builds are unsigned. SignPath's certificate attests only to build provenance: copyright of the Bergag source remains with Fadlelmula, as asserted by [LICENSE](LICENSE). Windows displays SignPath Foundation as the signer because the certificate belongs to them, not because they own the software. See [docs/SIGNING.md](docs/SIGNING.md) for the owner-only setup steps and limitations.
+Free code signing provided by SignPath.io, certificate by SignPath Foundation. Bergag applied to the SignPath Foundation open-source program on 2026-11-21; on 2026-11-22 the Foundation replied that it was **unable to approve the application at this time** because the project does not yet show enough external trust and visibility signals. **Signing is not active yet** and current builds are unsigned. Reapplying after the project gains broader recognition and a regular paid SignPath subscription are options, but neither has been started. SignPath's certificate attests only to build provenance: copyright of the Bergag source remains with Fadlelmula, as asserted by [LICENSE](LICENSE). Windows displays SignPath Foundation as the signer because the certificate belongs to them, not because they own the software. See [docs/SIGNING.md](docs/SIGNING.md) for the owner-only setup steps and limitations.
 
 - **Authors and reviewers:** the repository owner (`@Fadlelmula`), through repository permissions. Branch protection on `main` is planned but not yet enabled.
 - **Approver:** the repository owner (`@Fadlelmula`). Each signing request requires manual approval and is restricted to the public `release-build.yml` workflow on `refs/tags/v*` running on GitHub-hosted runners.

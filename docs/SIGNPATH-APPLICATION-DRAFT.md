@@ -2,7 +2,13 @@
 
 Source checked on 2026-11-21: <https://signpath.org/apply> (HubSpot form) and <https://signpath.org/terms>. The apply page embeds a HubSpot form, so its field list is not visible in the page HTML; the fields below come from a documented successful applicant's list plus SignPath's own eligibility terms.
 
-The project owner reported submitting this application on 2026-11-21. No confirmation or reference number was recorded here, and SignPath has not responded. These answers are retained as the submitted record.
+The project owner reported submitting this application on 2026-11-21. On 2026-11-22, SignPath replied that it was **unable to approve the application at this time**. The response and the submitted answers are retained below as the record.
+
+## Outcome (2026-11-22)
+
+SignPath Foundation said the program is for projects that have already established a certain level of public trust and visibility. The reviewer said Bergag did not yet show enough external signals such as GitHub stars, forks, and contributors; external articles; independent references or discussions (for example Reddit, Stack Overflow, or YouTube); institutional backing; or evidence of sustained activity and engagement. They described this as the Foundation program's visibility threshold.
+
+SignPath encouraged reapplying once Bergag has broader recognition and pointed to a [regular paid subscription](https://docs.signpath.io/change-subscription) as a way to proceed sooner. **No reapplication has been filed, no paid subscription has been started, and no installer has been signed.** The deferred signing and no-binary-release decisions remain unchanged.
 
 ## Form fields
 
@@ -49,10 +55,10 @@ Tick the consent boxes for the SignPath Foundation Code of Conduct and for SignP
 
 ## Real risks to expect
 
-- SignPath states that executable applications need "a certain verifiable reputation" and that acceptance is discretionary. A brand-new project with no download history may be declined even when every technical condition is met.
+- This risk materialized: SignPath declined the Foundation application on 2026-11-22 because Bergag did not yet have enough external trust/visibility signals. Acceptance for a future Foundation application remains discretionary; no reapplication has been filed.
 - All maintainers need MFA on GitHub and SignPath. GitHub MFA could not be confirmed through `gh api user` — verify manually.
 - Branch protection on `main` is still not configured.
 
-## After acceptance
+## If accepted later or a paid subscription is chosen
 
-See the checklist in [docs/SIGNING.md](SIGNING.md). In short: install the SignPath GitHub App, add the GitHub.com trusted build system, create the project and `installers` artifact configuration, configure the signing policy with manual approval, add the repository secret/variables, then push a `v*` tag and approve the request.
+See the checklist in [docs/SIGNING.md](SIGNING.md). In short: install the SignPath GitHub App, add the GitHub.com trusted build system, create the project and `installers` artifact configuration, configure the signing policy with manual approval, add the repository secret/variables, then push a `v*` tag and approve the request. No such setup has been started after the 2026-11-22 decline.

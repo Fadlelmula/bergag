@@ -4,11 +4,18 @@ All notable changes to Bergag will be documented here.
 
 > Sign-off: Milestone 9 was approved by the user on 2026-11-21 after local verification. It was the final planned milestone. With authorization, the MIT license was added and a baseline commit and annotated tag `v0.1.0-m9` were created. Installer signing was deferred by user decision; the source and tag were pushed to https://github.com/Fadlelmula/bergag without releasing installer binaries.
 
+## [Unreleased] — 2026-11-22 — SignPath Foundation application declined
+
+### Notes
+
+- The SignPath Foundation team replied that it was unable to approve Bergag's application at this time because the project does not yet show enough external trust and visibility signals. SignPath suggested reapplying after broader recognition or using a regular paid subscription as a faster alternative.
+- No reapplication, paid subscription, account configuration, signing request, signed installer, or binary release was started. The deferred signing decision remains unchanged; `docs/SIGNING.md`, `docs/SIGNPATH-APPLICATION-DRAFT.md`, `README.md`, and `docs/RELEASE-CHECKLIST.md` now record the outcome.
+
 ## [Unreleased] — 2026-11-21 — SignPath application submitted
 
 ### Notes
 
-- The project owner reported submitting the SignPath Foundation application on 2026-11-21. No acceptance, account configuration, signing request, or signed installer exists yet. This does not change the deferred signing decision or the decision not to release binaries.
+- The project owner reported submitting the SignPath Foundation application on 2026-11-21. At that time no acceptance, account configuration, signing request, or signed installer existed; SignPath later declined the application on 2026-11-22, as recorded above. This does not change the deferred signing decision or the decision not to release binaries.
 
 ## [Unreleased] — 2026-11-21 — SignPath signing preparation (not active)
 
